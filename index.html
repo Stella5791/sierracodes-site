@@ -1,202 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sierra Codes: tools, writing, and innovation at the intersection of language, tech, and health" />
-  <meta name="keywords" content="Stella Bullo, Sierra Codes, NLP, health tech, Python, metaphor, discourse, accessibility" />
-  <meta name="author" content="Stella Bullo" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sierra Codes</title>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon-64x64.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --bg-color: #fdfaf6;
-      --text-color: #2a2a2a;
-      --accent-color: #9c5b65;
-      --light-block: #f5eaea;
-    }
-    [data-theme="dark"] {
-      --bg-color: #121212;
-      --text-color: #eaeaea;
-      --accent-color: #c47c86;
-      --light-block: #2a2a2a;
-    }
-
     html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      scroll-behavior: smooth;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
     }
 
-    .topnav {
-      background-color: var(--bg-color);
-      padding: 1rem 2rem;
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .topnav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: 500;
-    }
-
-    .topnav a:hover {
-      text-decoration: underline;
-      color: var(--accent-color);
-    }
-
-    .dark-toggle {
-      position: fixed;
-      left: 1rem;
-      bottom: 1rem;
-      font-size: 1.1rem;
-      cursor: pointer;
-      background: none;
-      border: 1px solid var(--text-color);
-      padding: 0.5rem 1rem;
-      border-radius: 30px;
-      color: var(--text-color);
+    :root {
+      --bg-light: #fdfaf6;
+      --text-dark: #2a2a2a;
+      --accent: #c47c86;
+      --hero-start: #a79a9c;
+      --hero-end: #6f5c5e;
+      --hero-text: #f9f7f3;
     }
 
     header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      text-align: center;
-      padding: 4rem 1.5rem 2.5rem;
+      padding: 1.8rem 2rem;
+      background-color: rgba(253, 250, 246, 0.95);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
-    header img {
+    .studio-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-symbol {
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      width: 28px;
+      height: auto;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a:hover::after {
+      content: '';
+      position: absolute;
       width: 100%;
-      max-height: 280px;
-      object-fit: cover;
-      filter: grayscale(1);
-      border-radius: 10px;
+      height: 2px;
+      background-color: var(--accent);
+      bottom: -4px;
+      left: 0;
     }
 
-    header h1 {
+    .contact-cta {
+      background-color: var(--accent);
+      color: white !important;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .contact-cta:hover {
+      background-color: #7f444f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero {
+      background: linear-gradient(to bottom right, var(--hero-start), var(--hero-end));
+      color: var(--hero-text);
+      text-align: left;
+      padding: 6rem 3rem;
+      flex: 1;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .hero h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: 2.4rem;
-      margin: 1rem 0 0.5rem;
-      color: var(--accent-color);
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      color: var(--hero-text);
     }
 
-    .tagline {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin-bottom: 2rem;
-    }
-
-    main {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    section {
-      margin-bottom: 3rem;
-    }
-
-    section h2 {
-      font-family: 'DM Serif Display', serif;
-      color: var(--accent-color);
-      font-size: 1.6rem;
+    .hero h2 {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
       margin-bottom: 1rem;
     }
 
-    section p {
+    .hero p {
+      max-width: 650px;
       line-height: 1.6;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
     }
 
-    .block {
-      background-color: var(--light-block);
-      padding: 2rem;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem 0;
+    .hero button {
+      margin-top: 2rem;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    .hero button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
-    footer {
+    .footer {
+      background-color: #f5eaea;
+      padding: 1.5rem;
       text-align: center;
       font-size: 0.9rem;
-      padding: 2rem;
-      color: #888;
+      color: #555;
+      margin-top: auto;
     }
 
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
-      .tagline {
-        font-size: 1rem;
-      }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.3rem;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-
-  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
-
-  <nav class="topnav" role="navigation" aria-label="Main">
-    <a href="#about">About</a>
-    <a href="writing.html">Writing</a>
-    <a href="#contact">Contact</a>
-    <a href="https://stellabullo.netlify.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
-  </nav>
-
   <header>
-    <img src="assets/hero-mountains.jpg" alt="Grayscale mountains representing Sierra Codes">
-    <h1>Sierra Codes</h1>
-    <p class="tagline">Code, language, and lived experience — ethically crafted by Stella Bullo.</p>
+    <div class="studio-name">
+      <svg class="logo-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60">
+        <polyline fill="none" stroke="#c47c86" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+                  points="5,55 30,20 50,45 75,10 95,55" />
+      </svg>
+      Sierra Codes
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#writing">Writing</a>
+      <a href="https://stellabullo.netlify.app/">Portfolio</a>
+      <a class="contact-cta" href="mailto:stella.bullo.pro@gmail.com">Contact</a>
+
+    </nav>
   </header>
 
-  <main>
-    <section id="about" class="block">
-      <h2>About Me</h2>
-      <p>I’m Stella Bullo — a linguist, developer, and writer based between Argentina and the UK. After 20 years in UK higher education, I created Sierra Codes to bridge my background in discourse, metaphor, and health communication with new work in Python, NLP, and frontend development.</p>
-      <p>My mission is to turn lived experience into usable knowledge — through apps, articles, and ethically driven design. I blend research, emotion, and functionality into language-powered tech for real people. My work has been featured in <em>The New York Times</em>, <em>BBC Radio</em>, and peer-reviewed journals.</p>
-      <h2>About Sierra Codes</h2>
-      <p>Sierra Codes is a digital studio — and a philosophy. Here, code becomes narrative, and narrative becomes insight. We craft bilingual tools, stories, and strategies rooted in care, clarity, and lived reality.</p>
-    </section>
+  <section class="hero">
+    <h1>Sierra Codes</h1>
+    <h2>Code, language, and lived experience</h2>
+    <p>
+      Sierra Codes creates thoughtful digital work at the intersection of language, technology, and lived experience.
+      We design and build apps, websites, and written content that are rooted in research, shaped by empathy, and crafted with care.
+      Our mission is to turn insight into clarity through tools, stories, and systems that listen, explain, and empower.
+    </p>
+    <a href="mailto:stella.bullo.pro@gmail.com">
+      <button>Contact</button>
+    </a>
+    
+  </section>
 
-    <section id="contact" class="block">
-      <h2>Contact</h2>
-      <p>Connect via <a href="https://www.linkedin.com/in/stellabullo/" target="_blank" rel="noopener noreferrer">LinkedIn</a> or explore my code on <a href="https://github.com/stellabullo" target="_blank" rel="noopener noreferrer">GitHub</a>. View full <a href="https://stellabullo.netlify.app/" target="_blank" rel="noopener noreferrer">coding portfolio here</a>.</p>
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2025 Stella Bullo · Sierra Codes
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2025 Stella Bullo · Sierra Codes</p>
+      <p>
+        <a href="https://github.com/Stella5791?tab=repositories" target="_blank" rel="noopener">GitHub </a> |
+        <a href="https://www.linkedin.com/in/stella-bullo-905b17230/" target="_blank" rel="noopener">LinkedIn</a> |
+        <a href="mailto:stella.bullo.pro@gmail.com">Email</a>
+      </p>
+    </div>
   </footer>
-
-  <script>
-    function toggleDarkMode() {
-      const html = document.documentElement;
-      const current = html.getAttribute("data-theme");
-      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
-    }
-  </script>
 </body>
 </html>
