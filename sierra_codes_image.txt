@@ -1,0 +1,9 @@
+/images/sierra-codes-og.png
+
+You’ve now got the Open Graph preview image reference set. To complete it:
+
+1. Place the actual `sierra-codes-og.png` image (1200×630px) inside your `/images/` folder.
+2. Double‑check the `<head>` of your Sierra Codes HTML includes the OG and Twitter card tags pointing here.
+3. Test with LinkedIn’s Post Inspector or Twitter’s Card Validator to see the preview card live.
+
+Do you want me to also prepare smaller versions (favicon 32×32, apple‑touch 180×180, etc.) so your hill logo is consistent across tabs, bookmarks, and mobile home screens?
